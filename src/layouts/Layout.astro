@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import Seitenleiste from '../components/Seitenleiste.astro';
 import Suche from '../components/Suche.astro';
@@ -16,7 +17,7 @@ const { titel, aktiv, akzent } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang="de" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,6 +30,8 @@ const { titel, aktiv, akzent } = Astro.props;
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1e1e20" media="(prefers-color-scheme: dark)" />
     <title>{titel ? `${titel} – Shortcut-Lexikon` : 'Shortcut-Lexikon'}</title>
+    <!-- Beim Wechsel zwischen Apps nur den Inhalt austauschen, ohne die Seite neu zu laden -->
+    <ClientRouter />
   </head>
   <body style={akzent ? `--akzent: ${akzent}` : undefined}>
     <div class="rahmen">
@@ -39,7 +42,7 @@ const { titel, aktiv, akzent } = Astro.props;
             <Suche />
           </div>
         </header>
-        <main class="spalte inhalt">
+        <main class="spalte inhalt" transition:animate="fade">
           <slot />
         </main>
       </div>

@@ -21,13 +21,13 @@ const daten = apps.flatMap(({ app, shortcuts }) =>
 );
 ---
 
-<button class="suchfeld" type="button" data-suche-oeffnen>
+<button class="suchfeld" type="button" data-suche-oeffnen transition:persist="suchfeld">
   <Icon name="search" groesse={15} />
   <span class="suchfeld__text">Shortcuts suchen</span>
   <span class="kombi kombi--klein" aria-label="Befehl K"><kbd class="taste">⌘</kbd><kbd class="taste">K</kbd></span>
 </button>
 
-<dialog class="suche" aria-label="Shortcuts suchen">
+<dialog class="suche" aria-label="Shortcuts suchen" transition:persist="suchdialog">
   <div class="suche__feld">
     <Icon name="search" groesse={20} />
     <input
@@ -50,6 +50,7 @@ const daten = apps.flatMap(({ app, shortcuts }) =>
 <script type="application/json" id="suchdaten" set:html={JSON.stringify(daten)} />
 
 <script>
+  import { navigate } from 'astro:transitions/client';
   import Fuse from 'fuse.js';
   import { kombiHtml } from '../lib/keycaps';
 
@@ -144,8 +145,25 @@ const daten = apps.flatMap(({ app, shortcuts }) =>
     const ziel = treffer[index];
     if (!ziel) return;
     dialog.close();
-    location.href = ziel.url;
+    const url = new URL(ziel.url, location.href);
+    if (url.pathname === location.pathname) {
+      location.hash = url.hash;
+    } else {
+      navigate(url.href);
+    }
   }
+
+  // Den angesprungenen Shortcut kurz hervorheben – beim Laden, nach jedem Seitenwechsel und bei Sprüngen innerhalb der Seite.
+  function leuchte() {
+    const ziel = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!ziel) return;
+    ziel.classList.remove('aufleuchten');
+    void ziel.offsetWidth; // Animation neu starten
+    ziel.classList.add('aufleuchten');
+    ziel.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+  document.addEventListener('astro:page-load', leuchte);
+  window.addEventListener('hashchange', leuchte);
 
   document.querySelector('[data-suche-oeffnen]')!.addEventListener('click', oeffne);
 

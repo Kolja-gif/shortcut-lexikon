@@ -164,6 +164,7 @@ a {
 
 .kategorie {
   margin-top: 36px;
+  scroll-margin-top: 76px;
 }
 
 .kategorie h2 {
@@ -214,6 +215,7 @@ a {
 
 .zeile {
   position: relative;
+  scroll-margin-top: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -283,7 +285,7 @@ a {
 }
 
 /* Sprungziel aus der Suche kurz hervorheben */
-.zeile:target {
+.zeile.aufleuchten {
   animation: aufleuchten 1.8s ease-out;
 }
 
