@@ -1,0 +1,182 @@
+app:
+  id: mail
+  name: Mail
+  icon: mail
+  farbe: "#32ADE6"
+  reihenfolge: 5
+
+# Quelle: Apple „Mail – Benutzerhandbuch“, Tastaturkurzbefehle (support.apple.com/de-de/guide/mail/mlhlb94f262b/mac), abgeglichen am 2026-10-01
+
+shortcuts:
+  # ── Verfassen ─────────────────────────────────────────
+  - id: mail-neue-email
+    aktion: Neue E-Mail schreiben
+    tasten: [cmd, N]
+    kategorie: Verfassen
+    wichtig: true
+    tags: [neu, schreiben, nachricht, verfassen]
+    geprueft: 2026-10-01
+
+  - id: mail-senden
+    aktion: E-Mail senden
+    tasten: [shift, cmd, D]
+    kategorie: Verfassen
+    wichtig: true
+    tags: [senden, abschicken, verschicken]
+    geprueft: 2026-10-01
+
+  - id: mail-anhang
+    aktion: Datei anhängen
+    tasten: [shift, cmd, A]
+    kategorie: Verfassen
+    tags: [anhang, anhängen, datei, attachment]
+    geprueft: 2026-10-01
+
+  - id: mail-als-zitat-einsetzen
+    aktion: Text als Zitat einsetzen
+    tasten: [shift, cmd, V]
+    kategorie: Verfassen
+    tags: [zitat, einfügen]
+    geprueft: 2026-10-01
+
+  - id: mail-blindkopie
+    aktion: Feld „Blindkopie“ einblenden
+    tasten: [opt, cmd, B]
+    kategorie: Verfassen
+    tags: [bcc, blindkopie, empfänger]
+    geprueft: 2026-10-01
+
+  - id: mail-formatierter-text
+    aktion: Zwischen reinem und formatiertem Text wechseln
+    tasten: [shift, cmd, T]
+    kategorie: Verfassen
+    tags: [format, reiner text, html]
+    geprueft: 2026-10-01
+
+  - id: mail-senden-widerrufen
+    aktion: Senden widerrufen
+    tasten: [cmd, Z]
+    kategorie: Verfassen
+    tags: [rückgängig, zurückholen, undo send]
+    notiz: Nur kurz nach dem Senden möglich.
+    geprueft: 2026-10-01
+
+  # ── Antworten ─────────────────────────────────────────
+  - id: mail-antworten
+    aktion: Antworten
+    tasten: [cmd, R]
+    kategorie: Antworten
+    wichtig: true
+    tags: [antwort, reply]
+    geprueft: 2026-10-01
+
+  - id: mail-allen-antworten
+    aktion: Allen antworten
+    tasten: [shift, cmd, R]
+    kategorie: Antworten
+    wichtig: true
+    tags: [antwort, alle, reply all]
+    geprueft: 2026-10-01
+
+  - id: mail-weiterleiten
+    aktion: Weiterleiten
+    tasten: [shift, cmd, F]
+    kategorie: Antworten
+    wichtig: true
+    tags: [weiterleiten, forward]
+    geprueft: 2026-10-01
+
+  - id: mail-umleiten
+    aktion: Umleiten
+    tasten: [shift, cmd, E]
+    kategorie: Antworten
+    tags: [umleiten, redirect]
+    geprueft: 2026-10-01
+
+  # ── Postfach ──────────────────────────────────────────
+  - id: mail-abrufen
+    aktion: Neue E-Mails abrufen
+    tasten: [shift, cmd, N]
+    kategorie: Postfach
+    tags: [abrufen, aktualisieren, posteingang]
+    geprueft: 2026-10-01
+
+  - id: mail-gelesen
+    aktion: Als gelesen oder ungelesen markieren
+    tasten: [shift, cmd, U]
+    kategorie: Postfach
+    tags: [gelesen, ungelesen, markieren]
+    geprueft: 2026-10-01
+
+  - id: mail-archivieren
+    aktion: Archivieren
+    tasten: [ctrl, cmd, A]
+    kategorie: Postfach
+    wichtig: true
+    tags: [archiv, ablegen]
+    geprueft: 2026-10-01
+
+  - id: mail-bewegen-vorhergesagt
+    aktion: In vorgeschlagenes Postfach bewegen
+    tasten: [ctrl, cmd, M]
+    kategorie: Postfach
+    tags: [verschieben, ordner, ablegen]
+    geprueft: 2026-10-01
+
+  - id: mail-spam
+    aktion: Als Spam markieren
+    tasten: [shift, cmd, J]
+    kategorie: Postfach
+    tags: [spam, werbung, junk]
+    geprueft: 2026-10-01
+
+  - id: mail-spam-loeschen
+    aktion: Spam-Postfach leeren
+    tasten: [opt, cmd, J]
+    kategorie: Postfach
+    tags: [spam, löschen, werbung]
+    geprueft: 2026-10-01
+
+  - id: mail-regeln
+    aktion: Regeln anwenden
+    tasten: [ctrl, cmd, L]
+    kategorie: Postfach
+    tags: [regeln, filter, automatisch]
+    geprueft: 2026-10-01
+
+  - id: mail-loeschen
+    aktion: E-Mail löschen
+    tasten: [cmd, delete]
+    alternativ: [[delete]]
+    kategorie: Postfach
+    tags: [löschen, papierkorb, entfernen]
+    geprueft: null
+
+  # ── Darstellung ───────────────────────────────────────
+  - id: mail-seitenleiste
+    aktion: Seitenleiste ein- oder ausblenden
+    tasten: [ctrl, cmd, S]
+    kategorie: Darstellung
+    tags: [postfächer, sidebar]
+    geprueft: 2026-10-01
+
+  - id: mail-filter
+    aktion: Filter ein- oder ausschalten
+    tasten: [cmd, L]
+    kategorie: Darstellung
+    tags: [filter, ungelesen]
+    geprueft: 2026-10-01
+
+  - id: mail-hauptfenster
+    aktion: Hauptfenster anzeigen
+    tasten: [cmd, "0"]
+    kategorie: Darstellung
+    tags: [fenster, posteingang]
+    geprueft: 2026-10-01
+
+  - id: mail-suchen
+    aktion: Postfach durchsuchen
+    tasten: [opt, cmd, F]
+    kategorie: Darstellung
+    tags: [suchen, finden]
+    geprueft: null

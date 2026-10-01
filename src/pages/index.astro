@@ -1,0 +1,52 @@
+---
+import AppSymbol from '../components/AppSymbol.astro';
+import ShortcutZeile from '../components/ShortcutZeile.astro';
+import Layout from '../layouts/Layout.astro';
+import { ladeApps, pfad } from '../lib/apps';
+
+const apps = await ladeApps();
+const gesamt = apps.reduce((summe, a) => summe + a.app.anzahl, 0);
+const mitWichtigen = apps
+  .map((a) => ({ ...a, wichtige: a.shortcuts.filter((s) => s.wichtig) }))
+  .filter((a) => a.wichtige.length > 0);
+---
+
+<Layout aktiv="start">
+  <div class="seitenkopf">
+    <div>
+      <h1>Übersicht</h1>
+      <p class="untertitel">
+        {`${gesamt} Shortcuts in ${apps.length} ${apps.length === 1 ? 'App' : 'Apps'}`}
+      </p>
+    </div>
+  </div>
+
+  <ul class="kacheln">
+    {
+      apps.map(({ app }) => (
+        <li>
+          <a class="kachel" href={pfad(`${app.id}/`)}>
+            <AppSymbol icon={app.icon} farbe={app.farbe} groesse={36} />
+            <span>
+              <span class="kachel__name">{app.name}</span>
+              <span class="kachel__anzahl">{app.anzahl} Shortcuts</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    mitWichtigen.map(({ app, wichtige }) => (
+      <section class="kategorie nur-wichtige" style={`--akzent: ${app.farbe}`}>
+        <h2>Wichtig in {app.name}</h2>
+        <ul class="zeilen">
+          {wichtige.map((s) => (
+            <ShortcutZeile shortcut={s} />
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Layout>

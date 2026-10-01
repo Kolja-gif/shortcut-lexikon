@@ -1,0 +1,54 @@
+---
+import AppSymbol from '../components/AppSymbol.astro';
+import ShortcutZeile from '../components/ShortcutZeile.astro';
+import Layout from '../layouts/Layout.astro';
+import { ladeApps, type AppMitShortcuts } from '../lib/apps';
+
+export async function getStaticPaths() {
+  const apps = await ladeApps();
+  return apps.map((eintrag) => ({ params: { app: eintrag.app.id }, props: eintrag }));
+}
+
+const { app, kategorien } = Astro.props as AppMitShortcuts;
+const ungeprueft = kategorien.flatMap((k) => k.shortcuts).filter((s) => s.geprueft === null).length;
+---
+
+<Layout titel={app.name} aktiv={app.id} akzent={app.farbe}>
+  <div class="seitenkopf">
+    <AppSymbol icon={app.icon} farbe={app.farbe} groesse={46} />
+    <div>
+      <h1>{app.name}</h1>
+      <p class="untertitel">
+        {app.anzahl} Shortcuts · {kategorien.length} Kategorien
+        {ungeprueft > 0 && ` · ${ungeprueft} ungeprüft`}
+      </p>
+    </div>
+  </div>
+
+  {
+    kategorien.length > 1 && (
+      <nav aria-label="Kategorien">
+        <ul class="sprungleiste">
+          {kategorien.map((k) => (
+            <li>
+              <a href={`#${k.anker}`}>{k.name}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+
+  {
+    kategorien.map((k) => (
+      <section class="kategorie" id={k.anker}>
+        <h2>{k.name}</h2>
+        <ul class="zeilen">
+          {k.shortcuts.map((s) => (
+            <ShortcutZeile shortcut={s} mitAnker />
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Layout>

@@ -1,0 +1,181 @@
+app:
+  id: vorschau
+  name: Vorschau
+  icon: image
+  farbe: "#34C759"
+  reihenfolge: 4
+
+# Quelle: Apple „Vorschau – Benutzerhandbuch“, Tastaturkurzbefehle (support.apple.com/de-de/guide/preview/cpprvw0003/mac).
+# Einträge mit geprueft: null stehen dort nicht und müssen in Vorschau im Menü geprüft werden.
+
+shortcuts:
+  # ── Ablage ────────────────────────────────────────────
+  - id: vorschau-sichern
+    aktion: Datei sichern
+    tasten: [cmd, S]
+    kategorie: Ablage
+    tags: [speichern]
+    geprueft: 2026-10-01
+
+  - id: vorschau-drucken
+    aktion: PDF oder Bild drucken
+    tasten: [cmd, P]
+    kategorie: Ablage
+    tags: [drucken]
+    geprueft: 2026-10-01
+
+  - id: vorschau-naechster-tab
+    aktion: Zum nächsten Tab wechseln
+    tasten: [ctrl, tab]
+    kategorie: Ablage
+    tags: [tab, weiter]
+    geprueft: 2026-10-01
+
+  - id: vorschau-vorheriger-tab
+    aktion: Zum vorherigen Tab wechseln
+    tasten: [ctrl, shift, tab]
+    kategorie: Ablage
+    tags: [tab, zurück]
+    geprueft: 2026-10-01
+
+  # ── Blättern ──────────────────────────────────────────
+  - id: vorschau-naechste-seite
+    aktion: Zur nächsten Seite blättern
+    tasten: [opt, down]
+    kategorie: Blättern
+    wichtig: true
+    tags: [seite, weiter, pdf]
+    geprueft: 2026-10-01
+
+  - id: vorschau-vorherige-seite
+    aktion: Zur vorherigen Seite blättern
+    tasten: [opt, up]
+    kategorie: Blättern
+    wichtig: true
+    tags: [seite, zurück, pdf]
+    geprueft: 2026-10-01
+
+  - id: vorschau-naechstes-dokument
+    aktion: Zum nächsten Dokument wechseln
+    tasten: [opt, pagedown]
+    kategorie: Blättern
+    tags: [dokument, bild, weiter]
+    notiz: Wenn mehrere Dateien in einem Fenster geöffnet sind.
+    geprueft: 2026-10-01
+
+  - id: vorschau-vorheriges-dokument
+    aktion: Zum vorherigen Dokument wechseln
+    tasten: [opt, pageup]
+    kategorie: Blättern
+    tags: [dokument, bild, zurück]
+    geprueft: 2026-10-01
+
+  - id: vorschau-gehe-zu-seite
+    aktion: Zu einer Seite springen
+    tasten: [opt, cmd, G]
+    kategorie: Blättern
+    tags: [seite, seitenzahl, gehe zu]
+    geprueft: null
+
+  # ── Darstellung ───────────────────────────────────────
+  - id: vorschau-vergroessern
+    aktion: Vergrößern
+    tasten: [cmd, +]
+    kategorie: Darstellung
+    wichtig: true
+    tags: [zoom, größer]
+    geprueft: null
+
+  - id: vorschau-verkleinern
+    aktion: Verkleinern
+    tasten: [cmd, "-"]
+    kategorie: Darstellung
+    wichtig: true
+    tags: [zoom, kleiner]
+    geprueft: null
+
+  - id: vorschau-originalgroesse
+    aktion: In Originalgröße anzeigen
+    tasten: [cmd, "0"]
+    kategorie: Darstellung
+    tags: [zoom, 100, tatsächliche größe]
+    geprueft: null
+
+  - id: vorschau-vollbild
+    aktion: Vollbildmodus ein- oder ausschalten
+    tasten: [ctrl, cmd, F]
+    kategorie: Darstellung
+    tags: [vollbild, fullscreen]
+    geprueft: 2026-10-01
+
+  - id: vorschau-seitenleiste-aus
+    aktion: Seitenleiste ausblenden
+    tasten: [opt, cmd, "1"]
+    kategorie: Darstellung
+    tags: [seitenleiste, sidebar]
+    geprueft: null
+
+  - id: vorschau-miniaturen
+    aktion: Miniaturen anzeigen
+    tasten: [opt, cmd, "2"]
+    kategorie: Darstellung
+    tags: [seitenleiste, seiten, übersicht, thumbnails]
+    geprueft: null
+
+  # ── Werkzeuge ─────────────────────────────────────────
+  - id: vorschau-markieren
+    aktion: Markierungswerkzeuge einblenden
+    tasten: [shift, cmd, A]
+    kategorie: Werkzeuge
+    wichtig: true
+    tags: [markup, zeichnen, unterschrift, text, pfeil]
+    geprueft: null
+
+  - id: vorschau-informationen
+    aktion: Informationen anzeigen
+    tasten: [cmd, I]
+    kategorie: Werkzeuge
+    tags: [informationen, inspektor, details]
+    geprueft: null
+
+  - id: vorschau-rechts-drehen
+    aktion: Nach rechts drehen
+    tasten: [cmd, R]
+    kategorie: Werkzeuge
+    tags: [drehen, rotieren]
+    geprueft: null
+
+  - id: vorschau-links-drehen
+    aktion: Nach links drehen
+    tasten: [cmd, L]
+    kategorie: Werkzeuge
+    tags: [drehen, rotieren]
+    geprueft: null
+
+  - id: vorschau-beschneiden
+    aktion: Auf Auswahl beschneiden
+    tasten: [cmd, K]
+    kategorie: Werkzeuge
+    tags: [zuschneiden, crop, ausschnitt]
+    geprueft: null
+
+  - id: vorschau-farbe-anpassen
+    aktion: Farbe anpassen
+    tasten: [opt, cmd, C]
+    kategorie: Werkzeuge
+    tags: [helligkeit, kontrast, farbe, bild]
+    geprueft: null
+
+  - id: vorschau-hintergrund-entfernen
+    aktion: Hintergrund entfernen
+    tasten: [shift, cmd, K]
+    kategorie: Werkzeuge
+    tags: [freistellen, hintergrund, bild]
+    geprueft: 2026-10-01
+
+  - id: vorschau-suchen
+    aktion: Im Dokument suchen
+    tasten: [cmd, F]
+    kategorie: Werkzeuge
+    tags: [suchen, finden, text, pdf]
+    geprueft: null

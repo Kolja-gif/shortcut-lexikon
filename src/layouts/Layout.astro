@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Seitenleiste from '../components/Seitenleiste.astro';
+import Suche from '../components/Suche.astro';
+import { pfad } from '../lib/apps';
+
+interface Props {
+  titel?: string;
+  /** "start" oder die id der aktuellen App */
+  aktiv: string;
+  /** Akzentfarbe der Seite (App-Farbe) */
+  akzent?: string;
+}
+
+const { titel, aktiv, akzent } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href={pfad('favicon.svg')} />
+    <link rel="apple-touch-icon" href={pfad('apple-touch-icon.png')} />
+    <link rel="manifest" href={pfad('manifest.webmanifest')} />
+    <meta name="application-name" content="Shortcut-Lexikon" />
+    <meta name="apple-mobile-web-app-title" content="Shortcut-Lexikon" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1e1e20" media="(prefers-color-scheme: dark)" />
+    <title>{titel ? `${titel} – Shortcut-Lexikon` : 'Shortcut-Lexikon'}</title>
+  </head>
+  <body style={akzent ? `--akzent: ${akzent}` : undefined}>
+    <div class="rahmen">
+      <Seitenleiste aktiv={aktiv} />
+      <div class="haupt">
+        <header class="kopf">
+          <div class="spalte">
+            <Suche />
+          </div>
+        </header>
+        <main class="spalte inhalt">
+          <slot />
+        </main>
+      </div>
+    </div>
+    <script>
+      // Offline-Speicher nur auf der veröffentlichten Seite, nicht beim lokalen Entwickeln
+      if ('serviceWorker' in navigator && import.meta.env.PROD) {
+        navigator.serviceWorker.register(`${import.meta.env.BASE_URL.replace(/\/$/, '')}/sw.js`);
+      }
+    </script>
+  </body>
+</html>

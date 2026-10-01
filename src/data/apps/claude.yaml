@@ -1,0 +1,103 @@
+app:
+  id: claude
+  name: Claude
+  icon: sparkles
+  farbe: "#D97757"
+  reihenfolge: 3
+
+# Die Shortcuts der Claude-Desktop-App ändern sich häufig.
+# Offiziell dokumentiert ist nur die Schnelleingabe (support.claude.com, „Use quick entry with Claude Desktop on Mac“).
+# Alle Einträge mit geprueft: null bitte in der App (Menüleiste) prüfen.
+
+shortcuts:
+  # ── Schnelleingabe ────────────────────────────────────
+  - id: claude-schnelleingabe
+    aktion: Schnelleingabe aus jeder App öffnen
+    tasten: [opt]
+    kategorie: Schnelleingabe
+    wichtig: true
+    tags: [quick entry, öffnen, überall]
+    notiz: ⌥ zweimal kurz hintereinander drücken. In den Einstellungen auf ⌥ Leertaste umstellbar.
+    geprueft: 2026-10-01
+
+  - id: claude-diktieren
+    aktion: Diktieren starten oder beenden
+    tasten: [capslock]
+    kategorie: Schnelleingabe
+    tags: [sprache, diktat, voice, sprechen]
+    notiz: Standardmäßig ausgeschaltet – in den Einstellungen unter „Allgemein“ aktivieren.
+    geprueft: 2026-10-01
+
+  # ── Chat ──────────────────────────────────────────────
+  - id: claude-senden
+    aktion: Nachricht senden
+    tasten: [enter]
+    kategorie: Chat
+    wichtig: true
+    tags: [senden, abschicken, prompt]
+    geprueft: 2026-10-01
+
+  - id: claude-neue-zeile
+    aktion: Neue Zeile in der Nachricht
+    tasten: [shift, enter]
+    kategorie: Chat
+    wichtig: true
+    tags: [zeilenumbruch, absatz]
+    geprueft: 2026-10-01
+
+  - id: claude-neuer-chat
+    aktion: Neuen Chat beginnen
+    tasten: [cmd, N]
+    kategorie: Chat
+    tags: [neu, unterhaltung, gespräch]
+    geprueft: null
+
+  - id: claude-chats-suchen
+    aktion: Chats durchsuchen
+    tasten: [cmd, K]
+    kategorie: Chat
+    tags: [suchen, verlauf, finden]
+    geprueft: null
+
+  - id: claude-antwort-stoppen
+    aktion: Antwort abbrechen
+    tasten: [esc]
+    kategorie: Chat
+    tags: [stopp, anhalten, abbrechen]
+    geprueft: null
+
+  # ── App ───────────────────────────────────────────────
+  - id: claude-einstellungen
+    aktion: Einstellungen öffnen
+    tasten: [cmd, ","]
+    kategorie: App
+    tags: [einstellungen, settings, optionen]
+    geprueft: null
+
+  - id: claude-vergroessern
+    aktion: Darstellung vergrößern
+    tasten: [cmd, +]
+    kategorie: App
+    tags: [zoom, größer, schrift]
+    geprueft: null
+
+  - id: claude-verkleinern
+    aktion: Darstellung verkleinern
+    tasten: [cmd, "-"]
+    kategorie: App
+    tags: [zoom, kleiner, schrift]
+    geprueft: null
+
+  - id: claude-fenster-schliessen
+    aktion: Fenster schließen
+    tasten: [cmd, W]
+    kategorie: App
+    tags: [fenster, zu]
+    geprueft: null
+
+  - id: claude-beenden
+    aktion: Claude beenden
+    tasten: [cmd, Q]
+    kategorie: App
+    tags: [beenden, quit]
+    geprueft: 2026-10-01

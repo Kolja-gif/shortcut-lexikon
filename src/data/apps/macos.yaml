@@ -1,0 +1,275 @@
+app:
+  id: macos
+  name: macOS allgemein
+  icon: laptop
+  farbe: "#5856D6"
+  reihenfolge: 1
+
+# Quelle: Apple Support „Tastaturkurzbefehle für den Mac“ (support.apple.com/de-de/102650), abgeglichen am 2026-10-01
+
+shortcuts:
+  # ── Allgemein ─────────────────────────────────────────
+  - id: macos-kopieren
+    aktion: Kopieren
+    tasten: [cmd, C]
+    kategorie: Allgemein
+    wichtig: true
+    tags: [copy, zwischenablage]
+    geprueft: 2026-10-01
+
+  - id: macos-ausschneiden
+    aktion: Ausschneiden
+    tasten: [cmd, X]
+    kategorie: Allgemein
+    tags: [cut, zwischenablage]
+    geprueft: 2026-10-01
+
+  - id: macos-einsetzen
+    aktion: Einsetzen
+    tasten: [cmd, V]
+    kategorie: Allgemein
+    wichtig: true
+    tags: [einfügen, paste, zwischenablage]
+    geprueft: 2026-10-01
+
+  - id: macos-einsetzen-stil-anpassen
+    aktion: Einsetzen und Stil anpassen
+    tasten: [opt, shift, cmd, V]
+    kategorie: Allgemein
+    tags: [einfügen, ohne formatierung, nur text, paste]
+    notiz: Fügt Text ohne fremde Formatierung ein.
+    geprueft: 2026-10-01
+
+  - id: macos-widerrufen
+    aktion: Widerrufen
+    tasten: [cmd, Z]
+    kategorie: Allgemein
+    wichtig: true
+    tags: [rückgängig, undo]
+    geprueft: 2026-10-01
+
+  - id: macos-wiederholen
+    aktion: Wiederholen
+    tasten: [shift, cmd, Z]
+    kategorie: Allgemein
+    tags: [redo, wiederherstellen]
+    geprueft: 2026-10-01
+
+  - id: macos-alles-auswaehlen
+    aktion: Alles auswählen
+    tasten: [cmd, A]
+    kategorie: Allgemein
+    tags: [markieren, select all]
+    geprueft: 2026-10-01
+
+  - id: macos-einstellungen
+    aktion: Einstellungen der App öffnen
+    tasten: [cmd, ","]
+    kategorie: Allgemein
+    tags: [optionen, preferences, settings]
+    geprueft: 2026-10-01
+
+  # ── Fenster & Apps ────────────────────────────────────
+  - id: macos-app-wechseln
+    aktion: Zwischen Apps wechseln
+    tasten: [cmd, tab]
+    kategorie: Fenster & Apps
+    wichtig: true
+    tags: [app switcher, programm wechseln]
+    notiz: ⌘ gedrückt halten und ⇥ mehrfach drücken, um weiter zu blättern.
+    geprueft: 2026-10-01
+
+  - id: macos-fenster-wechseln
+    aktion: Zwischen Fenstern einer App wechseln
+    tasten: [cmd, "<"]
+    kategorie: Fenster & Apps
+    tags: [fenster, wechseln]
+    notiz: Auf der deutschen Tastatur die Taste links neben Y – bitte prüfen.
+    geprueft: null
+
+  - id: macos-fenster-schliessen
+    aktion: Fenster schließen
+    tasten: [cmd, W]
+    kategorie: Fenster & Apps
+    tags: [fenster, zu]
+    geprueft: 2026-10-01
+
+  - id: macos-app-beenden
+    aktion: App beenden
+    tasten: [cmd, Q]
+    kategorie: Fenster & Apps
+    tags: [programm beenden, schließen, quit]
+    geprueft: 2026-10-01
+
+  - id: macos-app-ausblenden
+    aktion: App ausblenden
+    tasten: [cmd, H]
+    kategorie: Fenster & Apps
+    tags: [verstecken, hide]
+    geprueft: 2026-10-01
+
+  - id: macos-sofort-beenden
+    aktion: App sofort beenden
+    tasten: [opt, cmd, esc]
+    kategorie: Fenster & Apps
+    tags: [hängt, abgestürzt, reagiert nicht, force quit]
+    geprueft: 2026-10-01
+
+  - id: macos-vollbild
+    aktion: Vollbildmodus ein- oder ausschalten
+    tasten: [ctrl, cmd, F]
+    alternativ: [[fn, F]]
+    kategorie: Fenster & Apps
+    tags: [vollbild, fullscreen]
+    geprueft: 2026-10-01
+
+  - id: macos-mission-control
+    aktion: Mission Control öffnen
+    tasten: [ctrl, up]
+    kategorie: Fenster & Apps
+    tags: [alle fenster, übersicht, schreibtische]
+    geprueft: 2026-10-01
+
+  # ── Bildschirmfotos ───────────────────────────────────
+  - id: macos-screenshot-ganz
+    aktion: Bildschirmfoto vom ganzen Bildschirm erstellen
+    tasten: [shift, cmd, "3"]
+    kategorie: Bildschirmfotos
+    tags: [screenshot, bildschirmfoto, foto]
+    geprueft: 2026-10-01
+
+  - id: macos-screenshot-bereich
+    aktion: Bildschirmfoto von einem Bereich erstellen
+    tasten: [shift, cmd, "4"]
+    kategorie: Bildschirmfotos
+    wichtig: true
+    tags: [screenshot, bildschirmfoto, ausschnitt, auswahl]
+    notiz: Danach Leertaste drücken, um ein einzelnes Fenster aufzunehmen.
+    geprueft: 2026-10-01
+
+  - id: macos-screenshot-werkzeuge
+    aktion: Bildschirmfoto-Werkzeuge öffnen
+    tasten: [shift, cmd, "5"]
+    kategorie: Bildschirmfotos
+    tags: [screenshot, bildschirmfoto, bildschirmaufnahme, video, aufnahme]
+    notiz: Auch für Bildschirmaufnahmen (Video).
+    geprueft: 2026-10-01
+
+  # ── System ────────────────────────────────────────────
+  - id: macos-spotlight
+    aktion: Spotlight öffnen
+    tasten: [cmd, space]
+    kategorie: System
+    wichtig: true
+    tags: [suche, suchen, app starten]
+    geprueft: 2026-10-01
+
+  - id: macos-emoji
+    aktion: Emoji & Symbole öffnen
+    tasten: [ctrl, cmd, space]
+    alternativ: [[fn, E]]
+    kategorie: System
+    tags: [emoji, zeichenübersicht, sonderzeichen, smiley]
+    geprueft: 2026-10-01
+
+  - id: macos-sperren
+    aktion: Bildschirm sperren
+    tasten: [ctrl, cmd, Q]
+    kategorie: System
+    tags: [sperren, lock, pause]
+    geprueft: 2026-10-01
+
+  - id: macos-mitteilungen
+    aktion: Mitteilungszentrale ein- oder ausblenden
+    tasten: [fn, N]
+    kategorie: System
+    tags: [benachrichtigungen, widgets]
+    geprueft: 2026-10-01
+
+  # ── Finder ────────────────────────────────────────────
+  - id: macos-neuer-ordner
+    aktion: Neuen Ordner anlegen
+    tasten: [shift, cmd, N]
+    kategorie: Finder
+    tags: [ordner, neu]
+    geprueft: 2026-10-01
+
+  - id: macos-papierkorb
+    aktion: In den Papierkorb legen
+    tasten: [cmd, delete]
+    kategorie: Finder
+    wichtig: true
+    tags: [löschen, entfernen]
+    geprueft: 2026-10-01
+
+  - id: macos-quick-look
+    aktion: Übersicht (Quick Look) anzeigen
+    tasten: [space]
+    kategorie: Finder
+    tags: [vorschau, ansehen, quick look]
+    geprueft: 2026-10-01
+
+  - id: macos-downloads
+    aktion: Downloads-Ordner öffnen
+    tasten: [opt, cmd, L]
+    kategorie: Finder
+    tags: [download, ordner]
+    geprueft: 2026-10-01
+
+  - id: macos-gehe-zu-ordner
+    aktion: Gehe zum Ordner
+    tasten: [shift, cmd, G]
+    kategorie: Finder
+    tags: [pfad, ordner, springen]
+    geprueft: 2026-10-01
+
+  - id: macos-uebergeordneter-ordner
+    aktion: Übergeordneten Ordner öffnen
+    tasten: [cmd, up]
+    kategorie: Finder
+    tags: [ordner, hoch, zurück]
+    geprueft: 2026-10-01
+
+  - id: macos-versteckte-dateien
+    aktion: Unsichtbare Dateien ein- oder ausblenden
+    tasten: [shift, cmd, "."]
+    kategorie: Finder
+    tags: [versteckt, ausgeblendet, hidden]
+    notiz: Steht nicht auf Apples Übersichtsseite – bitte prüfen.
+    geprueft: null
+
+  # ── Textbearbeitung ───────────────────────────────────
+  - id: macos-zeilenanfang
+    aktion: Zum Zeilenanfang springen
+    tasten: [cmd, left]
+    kategorie: Textbearbeitung
+    tags: [cursor, anfang, zeile]
+    geprueft: 2026-10-01
+
+  - id: macos-zeilenende
+    aktion: Zum Zeilenende springen
+    tasten: [cmd, right]
+    kategorie: Textbearbeitung
+    tags: [cursor, ende, zeile]
+    geprueft: 2026-10-01
+
+  - id: macos-wort-zurueck
+    aktion: Ein Wort zurückspringen
+    tasten: [opt, left]
+    kategorie: Textbearbeitung
+    tags: [cursor, wort, links]
+    geprueft: 2026-10-01
+
+  - id: macos-wort-vor
+    aktion: Ein Wort vorspringen
+    tasten: [opt, right]
+    kategorie: Textbearbeitung
+    tags: [cursor, wort, rechts]
+    geprueft: 2026-10-01
+
+  - id: macos-wort-loeschen
+    aktion: Wort links vom Cursor löschen
+    tasten: [opt, delete]
+    kategorie: Textbearbeitung
+    tags: [löschen, wort, rückschritt]
+    geprueft: 2026-10-01

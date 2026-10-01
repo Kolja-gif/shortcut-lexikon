@@ -1,0 +1,658 @@
+/* ────────────────────────────────────────────────────────────
+   Farben & Abstände – alles hier, Hell- und Dunkelmodus
+   ──────────────────────────────────────────────────────────── */
+
+:root {
+  --schrift: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+
+  --hintergrund: #ffffff;
+  --seitenleiste: #f5f5f7;
+  --erhoeht: rgb(255 255 255 / 0.86);
+  --text: #1d1d1f;
+  --text-2: #6e6e73;
+  --text-3: #a1a1a6;
+  --linie: rgb(0 0 0 / 0.08);
+  --hover: rgb(0 0 0 / 0.045);
+  --feld: rgb(0 0 0 / 0.05);
+  --neutral-akzent: #8e8e93;
+  --akzent: var(--neutral-akzent);
+
+  --taste-oben: #ffffff;
+  --taste-unten: #f6f6f8;
+  --taste-rand: rgb(0 0 0 / 0.13);
+  --taste-kante: rgb(0 0 0 / 0.16);
+  --taste-glanz: rgb(255 255 255 / 0.9);
+
+  --tooltip: rgb(40 40 42 / 0.94);
+  --tooltip-text: #fff;
+  --schatten-gross: 0 24px 60px rgb(0 0 0 / 0.18), 0 2px 8px rgb(0 0 0 / 0.08);
+  --abdunkeln: rgb(0 0 0 / 0.12);
+
+  --breite: 900px;
+  --rand: 40px;
+  --radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hintergrund: #1e1e20;
+    --seitenleiste: #262628;
+    --erhoeht: rgb(44 44 47 / 0.88);
+    --text: #f5f5f7;
+    --text-2: #a1a1a6;
+    --text-3: #6e6e73;
+    --linie: rgb(255 255 255 / 0.08);
+    --hover: rgb(255 255 255 / 0.06);
+    --feld: rgb(255 255 255 / 0.07);
+
+    --taste-oben: #3d3d41;
+    --taste-unten: #353538;
+    --taste-rand: rgb(255 255 255 / 0.07);
+    --taste-kante: rgb(0 0 0 / 0.55);
+    --taste-glanz: rgb(255 255 255 / 0.08);
+
+    --tooltip: rgb(236 236 240 / 0.96);
+    --tooltip-text: #1d1d1f;
+    --schatten-gross: 0 24px 60px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.06);
+    --abdunkeln: rgb(0 0 0 / 0.35);
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   Grundlagen
+   ──────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--schrift);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--hintergrund);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--akzent) 70%, transparent);
+  outline-offset: 2px;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Seitenaufbau: Seitenleiste | Kopf + Inhalt
+   ──────────────────────────────────────────────────────────── */
+
+.rahmen {
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.haupt {
+  min-width: 0;
+}
+
+.spalte {
+  width: 100%;
+  max-width: calc(var(--breite) + 2 * var(--rand));
+  margin: 0 auto;
+  padding: 0 var(--rand);
+}
+
+.kopf {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 14px 0;
+  background: color-mix(in srgb, var(--hintergrund) 82%, transparent);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+}
+
+.inhalt {
+  padding-top: 20px;
+  padding-bottom: 96px;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --rand: 16px;
+  }
+  .rahmen {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   Überschriften
+   ──────────────────────────────────────────────────────────── */
+
+.seitenkopf {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.seitenkopf h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.untertitel {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.kategorie {
+  margin-top: 36px;
+}
+
+.kategorie h2 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--akzent);
+}
+
+/* Sprunglinks zu den Kategorien */
+.sprungleiste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sprungleiste a {
+  display: inline-block;
+  padding: 4px 11px;
+  font-size: 13px;
+  color: var(--text-2);
+  text-decoration: none;
+  background: var(--feld);
+  border-radius: 999px;
+  transition:
+    background-color 0.12s,
+    color 0.12s;
+}
+
+.sprungleiste a:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--akzent) 16%, transparent);
+}
+
+/* ────────────────────────────────────────────────────────────
+   Shortcut-Zeilen: Aktion links, Tasten rechtsbündig
+   ──────────────────────────────────────────────────────────── */
+
+.zeilen {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zeile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 46px;
+  padding: 8px 12px;
+  margin: 0 -12px;
+  border-radius: var(--radius);
+  transition: background-color 0.12s;
+}
+
+.zeile + .zeile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  border-top: 1px solid var(--linie);
+}
+
+.zeile:hover {
+  background: var(--hover);
+}
+
+.zeile:hover::before,
+.zeile:hover + .zeile::before {
+  border-color: transparent;
+}
+
+.zeile__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.zeile__aktion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zeile--wichtig .zeile__aktion {
+  font-weight: 560;
+}
+
+/* dezenter Punkt in der App-Farbe für wichtige Shortcuts */
+.zeile--wichtig .zeile__aktion::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--akzent);
+}
+
+.zeile__notiz {
+  margin-top: 1px;
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.ungeprueft {
+  display: inline-flex;
+  color: var(--text-3);
+  cursor: help;
+}
+
+/* Sprungziel aus der Suche kurz hervorheben */
+.zeile:target {
+  animation: aufleuchten 1.8s ease-out;
+}
+
+@keyframes aufleuchten {
+  0%,
+  30% {
+    background: color-mix(in srgb, var(--akzent) 18%, transparent);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────
+   Keycaps
+   ──────────────────────────────────────────────────────────── */
+
+.kombis {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  flex: none;
+}
+
+.kombi {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.oder {
+  margin: 0 10px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.taste {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 7px;
+  font-family: var(--schrift);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--taste-oben), var(--taste-unten));
+  border: 1px solid var(--taste-rand);
+  border-radius: 6px;
+  box-shadow:
+    0 1.5px 0 var(--taste-kante),
+    inset 0 1px 0 var(--taste-glanz);
+  cursor: default;
+}
+
+.taste--text,
+.taste--breit {
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}
+
+.taste--breit {
+  min-width: 84px;
+}
+
+.kombi--klein .taste,
+.suche__hinweise .taste {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  font-size: 11.5px;
+  border-radius: 4.5px;
+  box-shadow:
+    0 1px 0 var(--taste-kante),
+    inset 0 1px 0 var(--taste-glanz);
+}
+
+/* ────────────────────────────────────────────────────────────
+   Tooltips (Tastennamen, „Noch nicht geprüft“)
+   ──────────────────────────────────────────────────────────── */
+
+[data-tip] {
+  position: relative;
+}
+
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: 20;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: var(--tooltip-text);
+  background: var(--tooltip);
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 3px);
+  transition:
+    opacity 0.12s,
+    transform 0.12s;
+}
+
+[data-tip]:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition-delay: 0.35s;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Suchfeld im Kopf
+   ──────────────────────────────────────────────────────────── */
+
+.suchfeld {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 36px;
+  padding: 0 8px 0 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--text-3);
+  text-align: left;
+  background: var(--feld);
+  border: 1px solid transparent;
+  border-radius: 9px;
+  cursor: text;
+  transition:
+    border-color 0.12s,
+    background-color 0.12s;
+}
+
+.suchfeld:hover {
+  border-color: var(--linie);
+}
+
+.suchfeld__text {
+  flex: 1;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Such-Overlay im Spotlight-Stil
+   ──────────────────────────────────────────────────────────── */
+
+.suche {
+  width: min(640px, calc(100vw - 32px));
+  max-height: min(560px, 76vh);
+  margin: 12vh auto auto;
+  padding: 0;
+  color: var(--text);
+  background: var(--erhoeht);
+  backdrop-filter: saturate(180%) blur(24px);
+  -webkit-backdrop-filter: saturate(180%) blur(24px);
+  border: 1px solid var(--linie);
+  border-radius: 14px;
+  box-shadow: var(--schatten-gross);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.985);
+  transition:
+    opacity 0.16s ease-out,
+    transform 0.16s ease-out,
+    overlay 0.16s allow-discrete,
+    display 0.16s allow-discrete;
+}
+
+.suche[open] {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .suche[open] {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+}
+
+.suche::backdrop {
+  background: transparent;
+  transition:
+    background-color 0.16s,
+    overlay 0.16s allow-discrete,
+    display 0.16s allow-discrete;
+}
+
+.suche[open]::backdrop {
+  background: var(--abdunkeln);
+}
+
+@starting-style {
+  .suche[open]::backdrop {
+    background: transparent;
+  }
+}
+
+.suche__feld {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  color: var(--text-3);
+}
+
+.suche__feld input {
+  flex: 1;
+  min-width: 0;
+  height: 58px;
+  padding: 0;
+  font: inherit;
+  font-size: 20px;
+  color: var(--text);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.suche__feld input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.suche__ergebnisse {
+  flex: 1;
+  margin: 0;
+  padding: 0 8px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.suche__ergebnisse:not(:empty) {
+  padding-top: 6px;
+  padding-bottom: 8px;
+  border-top: 1px solid var(--linie);
+}
+
+.treffer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.treffer[aria-selected='true'] {
+  background: color-mix(in srgb, var(--akzent) 15%, transparent);
+}
+
+.treffer__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.treffer__app {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.punkt {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--akzent);
+}
+
+.suche__leer {
+  margin: 0;
+  padding: 22px 18px 26px;
+  font-size: 14px;
+  color: var(--text-2);
+  text-align: center;
+  border-top: 1px solid var(--linie);
+}
+
+.suche__hinweise {
+  display: flex;
+  gap: 18px;
+  padding: 10px 18px;
+  font-size: 12px;
+  color: var(--text-2);
+  border-top: 1px solid var(--linie);
+}
+
+.suche__hinweise span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.suche__hinweise span .taste:last-of-type {
+  margin-right: 3px;
+}
+
+/* Tooltips im Such-Overlay würden abgeschnitten – dort weglassen */
+.suche [data-tip]::after {
+  display: none;
+}
+
+/* Kacheln auf der Startseite */
+.kacheln {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.kachel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: 16px;
+  text-decoration: none;
+  border: 1px solid var(--linie);
+  border-radius: 12px;
+  transition:
+    background-color 0.12s,
+    border-color 0.12s;
+}
+
+.kachel:hover {
+  background: var(--hover);
+}
+
+.kachel__name {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.kachel__anzahl {
+  display: block;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Auf der Startseite sind alle Einträge wichtig – dort keine Hervorhebung nötig */
+.nur-wichtige .zeile--wichtig .zeile__aktion {
+  font-weight: inherit;
+}
+.nur-wichtige .zeile--wichtig .zeile__aktion::before {
+  display: none;
+}

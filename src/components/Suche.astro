@@ -1,0 +1,197 @@
+---
+// Suchfeld oben und das Such-Overlay im Spotlight-Stil (⌘K oder /).
+import { ladeApps, pfad } from '../lib/apps';
+import { kombiText } from '../lib/tasten';
+import Icon from './Icon.astro';
+
+const apps = await ladeApps();
+const daten = apps.flatMap(({ app, shortcuts }) =>
+  shortcuts.map((s) => ({
+    id: s.id,
+    aktion: s.aktion,
+    tasten: s.tasten,
+    alternativ: s.alternativ ?? [],
+    kombi: kombiText(s.tasten),
+    kategorie: s.kategorie,
+    tags: s.tags,
+    app: app.name,
+    farbe: app.farbe,
+    url: `${pfad(`${app.id}/`)}#${s.id}`,
+  })),
+);
+---
+
+<button class="suchfeld" type="button" data-suche-oeffnen>
+  <Icon name="search" groesse={15} />
+  <span class="suchfeld__text">Shortcuts suchen</span>
+  <span class="kombi kombi--klein" aria-label="Befehl K"><kbd class="taste">⌘</kbd><kbd class="taste">K</kbd></span>
+</button>
+
+<dialog class="suche" aria-label="Shortcuts suchen">
+  <div class="suche__feld">
+    <Icon name="search" groesse={20} />
+    <input
+      type="search"
+      placeholder="Wonach suchst du?"
+      autocomplete="off"
+      spellcheck="false"
+      aria-controls="suchergebnisse"
+    />
+  </div>
+  <ul class="suche__ergebnisse" id="suchergebnisse" role="listbox"></ul>
+  <p class="suche__leer" hidden>Keine Treffer</p>
+  <footer class="suche__hinweise">
+    <span><kbd class="taste">↑</kbd><kbd class="taste">↓</kbd> auswählen</span>
+    <span><kbd class="taste">↩</kbd> öffnen</span>
+    <span><kbd class="taste">⎋</kbd> schließen</span>
+  </footer>
+</dialog>
+
+<script type="application/json" id="suchdaten" set:html={JSON.stringify(daten)} />
+
+<script>
+  import Fuse from 'fuse.js';
+  import { kombiHtml } from '../lib/keycaps';
+
+  interface Eintrag {
+    id: string;
+    aktion: string;
+    tasten: string[];
+    alternativ: string[][];
+    kombi: string;
+    kategorie: string;
+    tags: string[];
+    app: string;
+    farbe: string;
+    url: string;
+  }
+
+  const daten: Eintrag[] = JSON.parse(document.getElementById('suchdaten')!.textContent!);
+  const dialog = document.querySelector<HTMLDialogElement>('dialog.suche')!;
+  const eingabe = dialog.querySelector('input')!;
+  const liste = dialog.querySelector<HTMLUListElement>('.suche__ergebnisse')!;
+  const leer = dialog.querySelector<HTMLParagraphElement>('.suche__leer')!;
+
+  // Umlaute und Akzente ignorieren: „offnen“ findet „öffnen“.
+  const normalisiere = (text: string) =>
+    text.toLowerCase().replace(/ß/g, 'ss').normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  // Durchsucht wird eine normalisierte Kopie der Texte.
+  const index = daten.map((d) => ({
+    aktion: normalisiere(d.aktion),
+    tags: d.tags.map(normalisiere),
+    kategorie: normalisiere(d.kategorie),
+    app: normalisiere(d.app),
+    kombi: d.kombi,
+  }));
+
+  const fuse = new Fuse(index, {
+    keys: [
+      { name: 'aktion', weight: 3 },
+      { name: 'tags', weight: 2 },
+      { name: 'kategorie', weight: 1 },
+      { name: 'app', weight: 1 },
+      { name: 'kombi', weight: 1 },
+    ],
+    threshold: 0.35,
+    ignoreLocation: true,
+  });
+
+  let treffer: Eintrag[] = [];
+  let auswahl = 0;
+
+  function zeige() {
+    const anfrage = normalisiere(eingabe.value.trim());
+    treffer = anfrage ? fuse.search(anfrage, { limit: 30 }).map((t) => daten[t.refIndex]) : [];
+    auswahl = 0;
+    liste.innerHTML = treffer
+      .map(
+        (t, i) => `
+        <li role="option" id="treffer-${i}" class="treffer" style="--akzent: ${t.farbe}" data-index="${i}">
+          <span class="treffer__text">
+            <span class="treffer__aktion"></span>
+            <span class="treffer__app"><span class="punkt"></span></span>
+          </span>
+          <span class="kombis">${kombiHtml(t.tasten, t.alternativ)}</span>
+        </li>`,
+      )
+      .join('');
+    // Texte sicher einsetzen (ohne HTML zu interpretieren)
+    liste.querySelectorAll('.treffer').forEach((el, i) => {
+      el.querySelector('.treffer__aktion')!.textContent = treffer[i].aktion;
+      el.querySelector('.treffer__app')!.append(`${treffer[i].app} · ${treffer[i].kategorie}`);
+    });
+    leer.hidden = !anfrage || treffer.length > 0;
+    markiere();
+  }
+
+  function markiere() {
+    liste.querySelectorAll('.treffer').forEach((el, i) => {
+      el.setAttribute('aria-selected', String(i === auswahl));
+    });
+    const aktiv = liste.querySelector<HTMLElement>(`#treffer-${auswahl}`);
+    aktiv?.scrollIntoView({ block: 'nearest' });
+    eingabe.setAttribute('aria-activedescendant', aktiv ? aktiv.id : '');
+  }
+
+  function oeffne() {
+    if (dialog.open) return;
+    dialog.showModal();
+    eingabe.select();
+  }
+
+  function gehZu(index: number) {
+    const ziel = treffer[index];
+    if (!ziel) return;
+    dialog.close();
+    location.href = ziel.url;
+  }
+
+  document.querySelector('[data-suche-oeffnen]')!.addEventListener('click', oeffne);
+
+  document.addEventListener('keydown', (e) => {
+    const tippt = e.target instanceof HTMLElement && e.target.matches('input, textarea, [contenteditable]');
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      dialog.open ? dialog.close() : oeffne();
+    } else if (e.key === '/' && !tippt && !dialog.open) {
+      e.preventDefault();
+      oeffne();
+    }
+  });
+
+  eingabe.addEventListener('input', zeige);
+
+  eingabe.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' && treffer.length) {
+      e.preventDefault();
+      auswahl = (auswahl + 1) % treffer.length;
+      markiere();
+    } else if (e.key === 'ArrowUp' && treffer.length) {
+      e.preventDefault();
+      auswahl = (auswahl - 1 + treffer.length) % treffer.length;
+      markiere();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      gehZu(auswahl);
+    }
+  });
+
+  liste.addEventListener('mousemove', (e) => {
+    const el = (e.target as HTMLElement).closest<HTMLElement>('.treffer');
+    if (el && Number(el.dataset.index) !== auswahl) {
+      auswahl = Number(el.dataset.index);
+      markiere();
+    }
+  });
+
+  liste.addEventListener('click', (e) => {
+    const el = (e.target as HTMLElement).closest<HTMLElement>('.treffer');
+    if (el) gehZu(Number(el.dataset.index));
+  });
+
+  // Klick auf den abgedunkelten Hintergrund schließt die Suche.
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>

@@ -1,0 +1,30 @@
+---
+import type { Shortcut } from '../lib/apps';
+import Icon from './Icon.astro';
+import Kombi from './Kombi.astro';
+
+interface Props {
+  shortcut: Shortcut;
+  /** Anker-id setzen (nur auf der App-Seite, damit die Suche dorthin springen kann) */
+  mitAnker?: boolean;
+}
+
+const { shortcut: s, mitAnker = false } = Astro.props;
+---
+
+<li class:list={['zeile', { 'zeile--wichtig': s.wichtig }]} id={mitAnker ? s.id : undefined}>
+  <div class="zeile__text">
+    <span class="zeile__aktion">
+      {s.aktion}
+      {
+        s.geprueft === null && (
+          <span class="ungeprueft" data-tip="Noch nicht geprüft" aria-label="Noch nicht geprüft">
+            <Icon name="circle-dashed" groesse={13} />
+          </span>
+        )
+      }
+    </span>
+    {s.notiz && <span class="zeile__notiz">{s.notiz}</span>}
+  </div>
+  <Kombi tasten={s.tasten} alternativ={s.alternativ} />
+</li>

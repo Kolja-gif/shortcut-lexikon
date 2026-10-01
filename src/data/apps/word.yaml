@@ -1,0 +1,210 @@
+app:
+  id: word
+  name: Microsoft Word
+  icon: file-text
+  farbe: "#2B579A"
+  reihenfolge: 6
+
+# Quelle: Microsoft Support „Tastenkombinationen in Word“, Abschnitt macOS, abgeglichen am 2026-10-01.
+# Einträge mit geprueft: null bitte in Word (deutsche Menüs) prüfen.
+
+shortcuts:
+  # ── Allgemein ─────────────────────────────────────────
+  - id: word-neues-dokument
+    aktion: Neues Dokument erstellen
+    tasten: [cmd, N]
+    kategorie: Allgemein
+    tags: [neu, dokument, leer]
+    geprueft: 2026-10-01
+
+  - id: word-sichern
+    aktion: Dokument sichern
+    tasten: [cmd, S]
+    kategorie: Allgemein
+    wichtig: true
+    tags: [speichern]
+    geprueft: 2026-10-01
+
+  - id: word-drucken
+    aktion: Dokument drucken
+    tasten: [cmd, P]
+    kategorie: Allgemein
+    tags: [drucken, pdf]
+    geprueft: 2026-10-01
+
+  - id: word-rueckgaengig
+    aktion: Rückgängig machen
+    tasten: [cmd, Z]
+    kategorie: Allgemein
+    tags: [widerrufen, undo]
+    geprueft: 2026-10-01
+
+  - id: word-wiederholen
+    aktion: Wiederholen
+    tasten: [cmd, Y]
+    kategorie: Allgemein
+    tags: [redo, wiederherstellen]
+    geprueft: 2026-10-01
+
+  - id: word-nur-text-einfuegen
+    aktion: Nur Text einfügen
+    tasten: [shift, cmd, V]
+    kategorie: Allgemein
+    tags: [einfügen, ohne formatierung, paste]
+    geprueft: null
+
+  # ── Zeichen ───────────────────────────────────────────
+  - id: word-fett
+    aktion: Fett
+    tasten: [cmd, B]
+    kategorie: Zeichen
+    wichtig: true
+    tags: [fett, bold, formatieren]
+    geprueft: 2026-10-01
+
+  - id: word-kursiv
+    aktion: Kursiv
+    tasten: [cmd, I]
+    kategorie: Zeichen
+    wichtig: true
+    tags: [kursiv, italic, formatieren]
+    geprueft: 2026-10-01
+
+  - id: word-unterstrichen
+    aktion: Unterstreichen
+    tasten: [cmd, U]
+    kategorie: Zeichen
+    tags: [unterstrichen, underline, formatieren]
+    geprueft: 2026-10-01
+
+  - id: word-doppelt-unterstrichen
+    aktion: Doppelt unterstreichen
+    tasten: [shift, cmd, D]
+    kategorie: Zeichen
+    tags: [unterstrichen, doppelt]
+    geprueft: 2026-10-01
+
+  - id: word-kapitaelchen
+    aktion: Kapitälchen
+    tasten: [shift, cmd, K]
+    kategorie: Zeichen
+    tags: [kapitälchen, small caps]
+    geprueft: 2026-10-01
+
+  - id: word-format-kopieren
+    aktion: Formatierung kopieren
+    tasten: [opt, cmd, C]
+    kategorie: Zeichen
+    tags: [format übertragen, pinsel, stil]
+    geprueft: 2026-10-01
+
+  - id: word-format-einfuegen
+    aktion: Formatierung einfügen
+    tasten: [opt, cmd, V]
+    kategorie: Zeichen
+    tags: [format übertragen, pinsel, stil]
+    geprueft: 2026-10-01
+
+  # ── Absatz ────────────────────────────────────────────
+  - id: word-linksbuendig
+    aktion: Linksbündig ausrichten
+    tasten: [cmd, L]
+    kategorie: Absatz
+    tags: [ausrichtung, links]
+    geprueft: 2026-10-01
+
+  - id: word-zentriert
+    aktion: Zentrieren
+    tasten: [cmd, E]
+    kategorie: Absatz
+    tags: [ausrichtung, mitte]
+    geprueft: 2026-10-01
+
+  - id: word-rechtsbuendig
+    aktion: Rechtsbündig ausrichten
+    tasten: [cmd, R]
+    kategorie: Absatz
+    tags: [ausrichtung, rechts]
+    geprueft: 2026-10-01
+
+  - id: word-blocksatz
+    aktion: Blocksatz
+    tasten: [cmd, J]
+    kategorie: Absatz
+    tags: [ausrichtung, block]
+    geprueft: 2026-10-01
+
+  - id: word-standard
+    aktion: Formatvorlage „Standard“ zuweisen
+    tasten: [shift, cmd, N]
+    kategorie: Absatz
+    tags: [formatvorlage, normal, standard]
+    geprueft: 2026-10-01
+
+  - id: word-ueberschrift-1
+    aktion: Überschrift 1 zuweisen
+    tasten: [opt, cmd, "1"]
+    kategorie: Absatz
+    wichtig: true
+    tags: [formatvorlage, überschrift, titel, heading]
+    notiz: Mit ⌥⌘2 und ⌥⌘3 entsprechend Überschrift 2 und 3.
+    geprueft: 2026-10-01
+
+  # ── Einfügen ──────────────────────────────────────────
+  - id: word-seitenumbruch
+    aktion: Seitenumbruch einfügen
+    tasten: [cmd, enter]
+    kategorie: Einfügen
+    tags: [umbruch, neue seite]
+    geprueft: 2026-10-01
+
+  - id: word-zeilenumbruch
+    aktion: Zeilenumbruch einfügen
+    tasten: [shift, enter]
+    kategorie: Einfügen
+    tags: [umbruch, neue zeile]
+    geprueft: 2026-10-01
+
+  - id: word-hyperlink
+    aktion: Link einfügen
+    tasten: [cmd, K]
+    kategorie: Einfügen
+    tags: [hyperlink, link, url]
+    geprueft: 2026-10-01
+
+  - id: word-kommentar
+    aktion: Kommentar einfügen
+    tasten: [opt, cmd, A]
+    kategorie: Einfügen
+    tags: [kommentar, anmerkung]
+    geprueft: 2026-10-01
+
+  # ── Überprüfen ────────────────────────────────────────
+  - id: word-suchen
+    aktion: Im Dokument suchen
+    tasten: [cmd, F]
+    kategorie: Überprüfen
+    tags: [suchen, finden]
+    geprueft: 2026-10-01
+
+  - id: word-ersetzen
+    aktion: Suchen und Ersetzen
+    tasten: [ctrl, H]
+    kategorie: Überprüfen
+    tags: [ersetzen, austauschen]
+    geprueft: 2026-10-01
+
+  - id: word-rechtschreibung
+    aktion: Rechtschreibung und Grammatik prüfen
+    tasten: [opt, cmd, L]
+    alternativ: [[F7]]
+    kategorie: Überprüfen
+    tags: [rechtschreibung, korrektur, grammatik]
+    geprueft: 2026-10-01
+
+  - id: word-aenderungen
+    aktion: Änderungen nachverfolgen ein- oder ausschalten
+    tasten: [shift, cmd, E]
+    kategorie: Überprüfen
+    tags: [track changes, überarbeiten, änderungen]
+    geprueft: 2026-10-01

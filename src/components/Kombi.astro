@@ -1,0 +1,12 @@
+---
+import { kombiHtml } from '../lib/keycaps';
+
+interface Props {
+  tasten: string[];
+  alternativ?: string[][];
+}
+
+const { tasten, alternativ } = Astro.props;
+---
+
+<span class="kombis" set:html={kombiHtml(tasten, alternativ)} />

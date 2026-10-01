@@ -1,0 +1,38 @@
+---
+// Zeichnet ein Lucide-Symbol anhand seines Namens (z. B. "globe").
+import { icons } from 'lucide';
+import { iconSchluessel } from '../lib/icon';
+
+interface Props {
+  name: string;
+  groesse?: number;
+  class?: string;
+}
+
+const { name, groesse = 16, class: klasse } = Astro.props;
+const knoten = icons[iconSchluessel(name) as keyof typeof icons];
+if (!knoten) throw new Error(`Unbekanntes Lucide-Icon „${name}“`);
+
+const inhalt = knoten
+  .map(([tag, attribute]) => {
+    const attr = Object.entries(attribute)
+      .map(([k, v]) => `${k}="${v}"`)
+      .join(' ');
+    return `<${tag} ${attr}/>`;
+  })
+  .join('');
+---
+
+<svg
+  class:list={['icon', klasse]}
+  width={groesse}
+  height={groesse}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  set:html={inhalt}
+/>

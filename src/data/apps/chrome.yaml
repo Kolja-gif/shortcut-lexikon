@@ -1,0 +1,229 @@
+app:
+  id: chrome
+  name: Google Chrome
+  icon: globe
+  farbe: "#4285F4"
+  reihenfolge: 2
+
+# Quelle: Google Chrome-Hilfe, Tastenkombinationen (Mac), abgeglichen am 2026-10-01
+
+shortcuts:
+  # ── Tabs ──────────────────────────────────────────────
+  - id: chrome-neuer-tab
+    aktion: Neuen Tab öffnen
+    tasten: [cmd, T]
+    kategorie: Tabs
+    wichtig: true
+    tags: [tab, neu]
+    geprueft: 2026-10-01
+
+  - id: chrome-tab-schliessen
+    aktion: Tab schließen
+    tasten: [cmd, W]
+    kategorie: Tabs
+    wichtig: true
+    tags: [tab, zu]
+    geprueft: 2026-10-01
+
+  - id: chrome-tab-wiederherstellen
+    aktion: Geschlossenen Tab wieder öffnen
+    tasten: [shift, cmd, T]
+    kategorie: Tabs
+    wichtig: true
+    tags: [tab, wiederherstellen, rückgängig, versehentlich]
+    notiz: Mehrfach drücken öffnet nacheinander die zuletzt geschlossenen Tabs.
+    geprueft: 2026-10-01
+
+  - id: chrome-naechster-tab
+    aktion: Zum nächsten Tab wechseln
+    tasten: [opt, cmd, right]
+    alternativ: [[ctrl, tab]]
+    kategorie: Tabs
+    tags: [tab, rechts, weiter]
+    geprueft: 2026-10-01
+
+  - id: chrome-vorheriger-tab
+    aktion: Zum vorherigen Tab wechseln
+    tasten: [opt, cmd, left]
+    alternativ: [[ctrl, shift, tab]]
+    kategorie: Tabs
+    tags: [tab, links, zurück]
+    geprueft: 2026-10-01
+
+  - id: chrome-erster-tab
+    aktion: Zum ersten Tab springen
+    tasten: [cmd, "1"]
+    kategorie: Tabs
+    tags: [tab, nummer]
+    notiz: ⌘2 bis ⌘8 springen entsprechend zum 2. bis 8. Tab.
+    geprueft: 2026-10-01
+
+  - id: chrome-letzter-tab
+    aktion: Zum letzten Tab springen
+    tasten: [cmd, "9"]
+    kategorie: Tabs
+    tags: [tab, ende]
+    geprueft: 2026-10-01
+
+  # ── Fenster ───────────────────────────────────────────
+  - id: chrome-neues-fenster
+    aktion: Neues Fenster öffnen
+    tasten: [cmd, N]
+    kategorie: Fenster
+    tags: [fenster, neu]
+    geprueft: 2026-10-01
+
+  - id: chrome-inkognito
+    aktion: Neues Inkognito-Fenster öffnen
+    tasten: [shift, cmd, N]
+    kategorie: Fenster
+    wichtig: true
+    tags: [privat, inkognito, privates fenster]
+    geprueft: 2026-10-01
+
+  - id: chrome-fenster-schliessen
+    aktion: Fenster schließen
+    tasten: [shift, cmd, W]
+    kategorie: Fenster
+    tags: [fenster, zu, alle tabs]
+    geprueft: 2026-10-01
+
+  - id: chrome-vollbild
+    aktion: Vollbildmodus ein- oder ausschalten
+    tasten: [ctrl, cmd, F]
+    alternativ: [[fn, F]]
+    kategorie: Fenster
+    tags: [vollbild, fullscreen, groß]
+    geprueft: 2026-10-01
+
+  # ── Navigation ────────────────────────────────────────
+  - id: chrome-adressleiste
+    aktion: Adressleiste auswählen
+    tasten: [cmd, L]
+    kategorie: Navigation
+    wichtig: true
+    tags: [url, adresse, omnibox, suchen]
+    geprueft: 2026-10-01
+
+  - id: chrome-neu-laden
+    aktion: Seite neu laden
+    tasten: [cmd, R]
+    kategorie: Navigation
+    tags: [aktualisieren, reload, refresh]
+    geprueft: 2026-10-01
+
+  - id: chrome-neu-laden-cache
+    aktion: Seite ohne Cache neu laden
+    tasten: [shift, cmd, R]
+    kategorie: Navigation
+    tags: [aktualisieren, reload, hart, cache]
+    geprueft: 2026-10-01
+
+  - id: chrome-zurueck
+    aktion: Zur vorherigen Seite zurückgehen
+    tasten: [cmd, left]
+    kategorie: Navigation
+    tags: [zurück, back, verlauf]
+    geprueft: 2026-10-01
+
+  - id: chrome-vorwaerts
+    aktion: Zur nächsten Seite vorgehen
+    tasten: [cmd, right]
+    kategorie: Navigation
+    tags: [vorwärts, forward, verlauf]
+    geprueft: 2026-10-01
+
+  # ── Seite ─────────────────────────────────────────────
+  - id: chrome-suchen
+    aktion: Auf der Seite suchen
+    tasten: [cmd, F]
+    kategorie: Seite
+    wichtig: true
+    tags: [finden, text]
+    geprueft: 2026-10-01
+
+  - id: chrome-weitersuchen
+    aktion: Nächsten Treffer anzeigen
+    tasten: [cmd, G]
+    kategorie: Seite
+    tags: [suchen, finden, weiter]
+    geprueft: 2026-10-01
+
+  - id: chrome-drucken
+    aktion: Seite drucken
+    tasten: [cmd, P]
+    kategorie: Seite
+    tags: [drucken, pdf]
+    geprueft: 2026-10-01
+
+  - id: chrome-vergroessern
+    aktion: Seite vergrößern
+    tasten: [cmd, +]
+    kategorie: Seite
+    tags: [zoom, größer]
+    geprueft: 2026-10-01
+
+  - id: chrome-verkleinern
+    aktion: Seite verkleinern
+    tasten: [cmd, "-"]
+    kategorie: Seite
+    tags: [zoom, kleiner]
+    geprueft: 2026-10-01
+
+  - id: chrome-zoom-zuruecksetzen
+    aktion: Zoom zurücksetzen
+    tasten: [cmd, "0"]
+    kategorie: Seite
+    tags: [zoom, standardgröße, 100]
+    geprueft: 2026-10-01
+
+  # ── Lesezeichen & Verlauf ─────────────────────────────
+  - id: chrome-lesezeichen
+    aktion: Seite als Lesezeichen speichern
+    tasten: [cmd, D]
+    kategorie: Lesezeichen & Verlauf
+    tags: [bookmark, favorit, merken]
+    geprueft: 2026-10-01
+
+  - id: chrome-lesezeichenleiste
+    aktion: Lesezeichenleiste ein- oder ausblenden
+    tasten: [shift, cmd, B]
+    kategorie: Lesezeichen & Verlauf
+    tags: [bookmark, leiste]
+    geprueft: 2026-10-01
+
+  - id: chrome-lesezeichenmanager
+    aktion: Lesezeichen-Manager öffnen
+    tasten: [opt, cmd, B]
+    kategorie: Lesezeichen & Verlauf
+    tags: [bookmark, verwalten]
+    geprueft: 2026-10-01
+
+  - id: chrome-verlauf
+    aktion: Verlauf öffnen
+    tasten: [cmd, Y]
+    kategorie: Lesezeichen & Verlauf
+    tags: [history, besucht]
+    geprueft: 2026-10-01
+
+  - id: chrome-downloads
+    aktion: Downloads anzeigen
+    tasten: [shift, cmd, J]
+    kategorie: Lesezeichen & Verlauf
+    tags: [download, heruntergeladen]
+    geprueft: 2026-10-01
+
+  - id: chrome-browserdaten-loeschen
+    aktion: Browserdaten löschen
+    tasten: [shift, cmd, delete]
+    kategorie: Lesezeichen & Verlauf
+    tags: [cache, cookies, verlauf löschen]
+    geprueft: 2026-10-01
+
+  # ── Werkzeuge ─────────────────────────────────────────
+  - id: chrome-entwicklertools
+    aktion: Entwicklertools öffnen
+    tasten: [opt, cmd, I]
+    kategorie: Werkzeuge
+    tags: [devtools, inspector, untersuchen]
+    geprueft: 2026-10-01
